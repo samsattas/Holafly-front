@@ -7,10 +7,6 @@ import Login from "./components/pages/Login.tsx";
 
 const router = createHashRouter([
   {
-    path: "/",
-    element: <p>login</p>,
-  },
-  {
     path: "/log",
     element: <Login />,
   },
