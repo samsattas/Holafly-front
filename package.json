@@ -1,7 +1,6 @@
 {
   "name": "holafly-front",
   "private": true,
-  "homepage": "https://gitname.github.io/Holafly-front",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
