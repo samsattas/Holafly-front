@@ -1,13 +1,47 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, NavigateFunction, useNavigate } from "react-router-dom";
 import eye from "../../assets/eye.svg";
 import eyeOff from "../../assets/eye-off.svg";
 import holaflyLogo from "../../assets/holafly-logo.svg";
 import { useState } from "react";
+import { login } from "../services/auth.service";
 
-const Login = () => {
+const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [user, setUser] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
+
+  const navigate: NavigateFunction = useNavigate();
+
+  const handleLogin = () => {
+    setMessage("");
+    setLoading(true);
+
+    login(user, password).then(
+      () => {
+        navigate("/home");
+        window.location.reload();
+      },
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        setLoading(false);
+        setMessage(resMessage);
+      }
+    );
+  };
+
   return (
-    <form className="flex gap-4 w-full items-center justify-center h-full bg-primary">
+    <form
+      className="flex gap-4 w-full items-center justify-center h-full bg-primary"
+      onSubmit={handleLogin}
+    >
       <section className="hidden flex-col justify-center h-full w-1/2 bg-white p-8 md:flex text-start rounded-r-2xl">
         <h1 className="text-primary text-[8vw] font-bold">Welcome back!</h1>
         <p className="text-primary">View all your plans</p>
@@ -21,6 +55,7 @@ const Login = () => {
             name="user"
             placeholder="Username"
             className="outline-primary border border-gray-300 rounded-md p-2 w-full"
+            onChange={(e) => setPassword(e.target.value)}
           />
           <div className="flex border border-gray-300 rounded-md items-center pr-2 w-full focus-within:border-2 focus-within:border-primary">
             <input
@@ -28,6 +63,7 @@ const Login = () => {
               name="password"
               placeholder="Password"
               className="outline-none rounded-md p-2 w-full"
+              onChange={(e) => setPassword(e.target.value)}
             />
             {showPassword ? (
               <img
@@ -45,12 +81,12 @@ const Login = () => {
               />
             )}
           </div>
-          <NavLink
-            to="/home"
+          <button
+            type="submit"
             className="bg-primary w-full text-white text-center rounded-md p-2 hover:bg-[#e6485cee]"
           >
-            <input type="submit" name="" value="Login" />
-          </NavLink>
+            Login
+          </button>
         </section>
       </div>
     </form>
