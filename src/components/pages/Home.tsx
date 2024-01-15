@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Card from "../custom-components/Card";
-import { getCurrentUser } from "../services/auth.service";
 import { getCardsByUsername } from "../../utils/UserSlice";
 
 interface CardData {

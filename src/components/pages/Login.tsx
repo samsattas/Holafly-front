@@ -19,6 +19,7 @@ const Login: React.FC = () => {
     //     window.location.reload();
     //   }
     // );
+    console.log(password);
 
     navigate("/home?user=" + user);
   };
