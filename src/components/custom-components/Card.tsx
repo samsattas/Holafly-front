@@ -19,8 +19,10 @@ const Card = ({ card }: CardProps) => {
   const kbToGb = (kb: number) => {
     return (kb / 1024 / 1024).toFixed(2);
   };
+  console.log(card);
+
   return (
-    <div className="rounded-md px-10 py-6 shadow-lg flex flex-col gap-4 min-w-[355px] h-256 bg-white">
+    <div className="rounded-md px-10 py-6 shadow-lg flex flex-col gap-4 min-w-[355px] h-288 bg-white">
       <div>
         <Status status={card.status} />
       </div>
@@ -38,6 +40,7 @@ const Card = ({ card }: CardProps) => {
           <span>{card.plan.split(",")[0]}</span>
           <span>{card.plan.split(",")[1]} of data</span>
           <span>Valid from {card.dateStart}</span>
+          {card.dateEnd ? <span>to {card.dateEnd}</span> : <br />}
         </p>
         {card.consumption && (
           <p
