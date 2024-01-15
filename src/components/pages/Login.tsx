@@ -3,38 +3,24 @@ import eye from "../../assets/eye.svg";
 import eyeOff from "../../assets/eye-off.svg";
 import holaflyLogo from "../../assets/holafly-logo.svg";
 import { useState } from "react";
-import { login } from "../services/auth.service";
+// import { login } from "../services/auth.service";
 
 const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  // const [loading, setLoading] = useState<boolean>(false);
-  // const [message, setMessage] = useState<string>("");
 
   const navigate: NavigateFunction = useNavigate();
 
   const handleLogin = () => {
-    // setMessage("");
-    // setLoading(true);
+    // login(user, password).then(
+    //   () => {
+    //     navigate("/home");
+    //     window.location.reload();
+    //   }
+    // );
 
-    login(user, password).then(
-      () => {
-        navigate("/home");
-        window.location.reload();
-      }
-      // (error) => {
-      // const resMessage =
-      //   (error.response &&
-      //     error.response.data &&
-      //     error.response.data.message) ||
-      //   error.message ||
-      //   error.toString();
-
-      // setLoading(false);
-      // setMessage(resMessage);
-      //}
-    );
+    navigate("/home?user=" + user);
   };
 
   return (
